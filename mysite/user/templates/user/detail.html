@@ -1,0 +1,18 @@
+{% load static %}
+
+<link rel="stylesheet" href="{% static 'user/style.css' %}">
+
+<h1>{{ user.name }}</h1></legend>
+{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+<p>{{ user.mail }}</p>
+<p>User joined on {{ user.join_date }}</p>
+{% if user.friends.all %}
+    <ul>
+        {% for friend in user.friends.all %}
+        <li><a href="{% url 'user:detail' friend.id %}">{{ friend.username }}</a></li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>User has no friends :(</p>
+{% endif %}
+<a href="{% url 'user:index' %}">Return to the main page</a>
